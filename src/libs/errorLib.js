@@ -4,5 +4,6 @@ export function onError(error){
     if(!(error instanceof Error) && error.message){
         message = error.message;
     }
+    console.log(error);
     alert(message);
 }
