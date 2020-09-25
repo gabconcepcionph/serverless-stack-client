@@ -4,6 +4,7 @@ import {FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import {onError} from "../libs/errorLib";
 import config from "../config";
+import {API} from "aws-amplify";
 import "./NewNote.css";
 
 export default function NewNote(){
@@ -27,7 +28,21 @@ export default function NewNote(){
             alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
             return;
         }
+        
         setIsLoading(true);
+        try{
+            await createNote({content});
+            history.push("/");
+        }catch(e){
+            onError(e);
+            setIsLoading(false);
+        }
+    }
+
+    function createNote(note){
+        return API.post("notes", "/notes", {
+            body: note
+        });
     }
 
     return (
