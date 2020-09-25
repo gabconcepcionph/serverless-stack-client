@@ -1,6 +1,6 @@
 export default {
     s3: {
-        REGION: "us-east-1",
+        REGION: "ap-southeast-1",
         BUCKET: "notes-app-uploads-gab"
     },
     apiGateway: {
